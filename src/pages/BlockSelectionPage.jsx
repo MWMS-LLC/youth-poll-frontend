@@ -37,7 +37,7 @@ const BlockSelectionPage = () => {
       
       try {
         // Fetch category info
-        const catResponse = await fetch('/api/categories')
+        const catResponse = await fetch(`${API_BASE_URL}/api/categories`)
         if (!catResponse.ok) throw new Error('Failed to fetch categories')
         const categories = await catResponse.json()
         console.log('Available categories:', categories)
