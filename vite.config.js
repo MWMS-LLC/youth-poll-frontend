@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // Get the backend URL from environment variable or default to localhost in development
-const backendUrl = process.env.VITE_API_URL || 'https://teen-poll14-backend.onrender.com'
+const backendUrl = process.env.VITE_API_BASE_URL || 'http://localhost:8000'
 
 export default defineConfig({
   plugins: [react()],
