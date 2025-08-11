@@ -80,6 +80,13 @@ const BubbleQuestion = ({
       return;
     }
 
+    // For "OTHER" options, show text input immediately
+    if (option.code === 'OTHER') {
+      setSelectedOption(option);
+      setShowOtherInput(true);
+      return;
+    }
+
     console.log('Starting handleOptionSelect')
     setLoading(true)
     setError(null)
@@ -121,13 +128,6 @@ const BubbleQuestion = ({
         setTimeout(() => setError(null), 3000);
         setLoading(false);
         return;
-      }
-
-      if (data.status === 'other_needed') {
-        setSelectedOption(option)
-        setShowOtherInput(true)
-        setLoading(false)
-        return
       }
 
       // Fetch results after successful vote - using the same API_BASE
