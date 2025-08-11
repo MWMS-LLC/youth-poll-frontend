@@ -614,8 +614,7 @@ const BubbleQuestion = ({
                 <div className="flex justify-end space-x-4">
                   <button
                     onClick={() => {
-                      setShowOtherInput(false);
-                      setSelectedOption(null);
+                      setSelectedOptions(prev => prev.filter(opt => opt.code !== 'OTHER'));
                       setOtherText('');
                     }}
                     className="px-6 py-2 text-gray-600 hover:text-gray-800 transition-colors"
