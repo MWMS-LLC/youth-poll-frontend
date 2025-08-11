@@ -43,7 +43,7 @@ const BlockSelectionPage = () => {
         console.log('Available categories:', categories)
         console.log('Looking for category ID:', categoryId, 'Type:', typeof categoryId)
         
-        const category = categories.find(cat => cat.id === categoryId)
+        const category = categories.find(cat => cat.id === parseInt(categoryId))
         console.log('Found category:', category)
         
         if (!category) {
