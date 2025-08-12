@@ -9,7 +9,7 @@ export default defineConfig({
   base: '/',
   server: {
     host: true,
-    port: 3001,
+    port: 3002,
     strictPort: true,
     proxy: {
       '/api': backendUrl,
@@ -24,7 +24,7 @@ export default defineConfig({
   },
   preview: {
     host: true,
-    port: 3001,
+    port: 3002,
     allowedHosts: ['teen-poll14-frontend.onrender.com', 'poll.1wit,hyin.com', 'myworldmysay.com',
       'www.myworldmysay.com'],
   },

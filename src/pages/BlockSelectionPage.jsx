@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate, useParams } from 'react-router-dom'
-import API_BASE_URL from '../config'
+import { apiCall } from '../config'
 
 const BlockSelectionPage = () => {
   const { categoryId } = useParams()
@@ -37,7 +37,7 @@ const BlockSelectionPage = () => {
       
       try {
         // Fetch category info
-        const catResponse = await fetch(`${API_BASE_URL}/api/categories`)
+        const catResponse = await apiCall(`/api/categories`)
         if (!catResponse.ok) throw new Error('Failed to fetch categories')
         const categories = await catResponse.json()
         console.log('Available categories:', categories)
@@ -55,7 +55,7 @@ const BlockSelectionPage = () => {
         setCategoryColor(categoryGradients[parseInt(category.id)] || categoryGradients[1])
 
         // Fetch blocks
-        const blocksResponse = await fetch(`${API_BASE_URL}/api/blocks/${categoryId}`)
+        const blocksResponse = await apiCall(`/api/blocks/${categoryId}`)
         if (!blocksResponse.ok) throw new Error('Failed to fetch blocks')
         const blocksData = await blocksResponse.json()
         setBlocks(blocksData || [])

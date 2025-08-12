@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import ResultsChart from './ResultsChart'
 import { useNavigate, Link } from 'react-router-dom'
 import { getReferralData, clearReferralData } from '../utils/referral'
-import API_BASE_URL from '../config'
+import { apiCall } from '../config'
 
 const BubbleQuestion = ({ 
   question, 
@@ -109,7 +109,7 @@ const BubbleQuestion = ({
       const referralData = getReferralData();
       
       // Submit vote to backend
-      const response = await fetch(`${API_BASE_URL}/api/vote`, {
+              const response = await apiCall(`/api/vote`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -131,11 +131,11 @@ const BubbleQuestion = ({
       }
 
       // Fetch results after successful vote - using the same API_BASE
-      const resultsUrl = `${API_BASE_URL}/api/questions/${question.question_id}/results`
+      const resultsUrl = `/api/questions/${question.question_id}/results`
       console.log('Attempting to fetch results from:', resultsUrl)
       
       try {
-        const resultsResponse = await fetch(resultsUrl)
+        const resultsResponse = await apiCall(resultsUrl)
         console.log('Results response:', resultsResponse)
         
         if (!resultsResponse.ok) {
@@ -202,7 +202,7 @@ const BubbleQuestion = ({
       // Get referral data if available
       const referralData = getReferralData();
       
-      const response = await fetch(`${API_BASE_URL}/api/other-response`, {
+      const response = await apiCall(`/api/other-response`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -222,8 +222,8 @@ const BubbleQuestion = ({
       }
 
       // After successful submission, proceed to show results
-      const resultsUrl = `${API_BASE_URL}/api/questions/${question.question_id}/results`;
-      const resultsResponse = await fetch(resultsUrl);
+      const resultsUrl = `/api/questions/${question.question_id}/results`;
+      const resultsResponse = await apiCall(resultsUrl);
       
       if (!resultsResponse.ok) {
         throw new Error('Failed to fetch results');
@@ -296,7 +296,7 @@ const BubbleQuestion = ({
       if (selectedOptions.some(opt => opt.code === 'OTHER')) {
         payload.other_text = otherText.trim();
       }
-      const response = await fetch(`${API_BASE_URL}/api/checkbox-vote`, {
+      const response = await apiCall(`/api/checkbox-vote`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -309,8 +309,8 @@ const BubbleQuestion = ({
         return;
       }
       // Fetch results after successful vote
-      const resultsUrl = `${API_BASE_URL}/api/questions/${question.question_id}/results`;
-      const resultsResponse = await fetch(resultsUrl);
+      const resultsUrl = `/api/questions/${question.question_id}/results`;
+      const resultsResponse = await apiCall(resultsUrl);
       if (!resultsResponse.ok) {
         throw new Error('Failed to fetch results');
       }

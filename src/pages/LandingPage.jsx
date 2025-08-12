@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { useAudio } from '../components/AudioContext'
 import ReferralLink from '../components/ReferralLink'
-import API_BASE_URL from '../config'
+import { apiCall } from '../config'
 
 // Constants
 const CHAOS_CATEGORY_ID = 12;
@@ -123,14 +123,14 @@ const LandingPage = () => {
       setError(null);
       
       try {
-        const catRes = await fetch(`${API_BASE_URL}/api/categories`);
+        const catRes = await apiCall(`/api/categories`);
         if (!catRes.ok) throw new Error('Failed to fetch categories');
         
         const categories = await catRes.json();
         const bubblesData = await Promise.all(
           categories.map(async (cat) => {
             try {
-              const qRes = await fetch(`${API_BASE_URL}/api/start-question/${cat.id}`);
+              const qRes = await apiCall(`/api/start-question/${cat.id}`);
               if (!qRes.ok) throw new Error('No start question');
               
               const question = await qRes.json();

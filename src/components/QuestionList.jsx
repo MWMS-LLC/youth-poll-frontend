@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate, useParams } from 'react-router-dom'
 import BubbleQuestion from './BubbleQuestion'
-import API_BASE_URL from '../config'
+import { apiCall } from '../config'
 
 const pastelColors = [
   'rgba(255, 182, 193, 0.9)', // Light Pink
@@ -27,7 +27,7 @@ const QuestionList = ({ isSoundOn = true }) => {
   const fetchQuestions = async () => {
     try {
       console.log('Fetching questions for category:', categoryId, 'block:', block);
-      const response = await fetch(`${API_BASE_URL}/api/questions?category_id=${categoryId}&block=${block}`);
+      const response = await apiCall(`/api/questions?category_id=${categoryId}&block=${block}`);
       if (!response.ok) {
         throw new Error('Failed to fetch questions');
       }
@@ -55,7 +55,7 @@ const QuestionList = ({ isSoundOn = true }) => {
   const fetchNextQuestion = async (questionId, optionCode) => {
     try {
       console.log('Fetching next question...')
-      const response = await fetch(`${API_BASE_URL}/api/next-question/${questionId}/${optionCode}`);
+      const response = await apiCall(`/api/next-question/${questionId}/${optionCode}`);
       if (!response.ok) {
         throw new Error('Failed to fetch next question')
       }
