@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: youth-poll-frontend
+    env: static
+    plan: free
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://youth-poll-backend-production.up.railway.app
+    routes:
+      - type: rewrite
+        source: "/*"
+        destination: "/index.html"
