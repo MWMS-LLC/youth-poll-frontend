@@ -1,6 +1,6 @@
 // Teen Site API Configuration
 const API_BASE_URL = import.meta.env.PROD 
-  ? 'https://youth-poll-backend-production.up.railway.app'  // Production API endpoint (Railway)
+  ? 'https://youth-poll-backend.onrender.com'  // Production API endpoint (Render)
   : 'http://localhost:8000';
 
 // Site configuration
